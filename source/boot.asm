@@ -11,13 +11,30 @@ mov es, ax
 mov ss, ax
 mov sp, 0x7c00
 
-; 0xb8000 文本显示器的内存区域
-mov ax, 0xb800
-mov ds, ax
-mov byte [0], 'H'
+; bochs 魔术断点
+xchg bx, bx
+
+mov si, booting
+call print
 
 ; 阻塞
 jmp $
+
+print:
+    mov ah, 0x0e
+.next:
+    mov al, [si]
+    cmp al, 0
+    ; zf = 1
+    jz .done
+    int 0x10
+    inc si
+    jmp .next
+.done:
+    ret
+
+booting:
+    db "Booting ChenyOS...", 10, 13, 0 ; \n\t
 
 ; 其余位置填充为 0
 times 510 - ($ - $$) db 0
