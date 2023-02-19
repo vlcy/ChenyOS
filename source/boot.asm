@@ -15,13 +15,15 @@ mov si, booting
 call print
 
 mov edi, 0x1000 ; 读取到的目标内存地址
-mov ecx, 0 ; 起始扇区
-mov bl, 1 ; 读取扇区数量
-
-; bochs 魔术断点
-xchg bx, bx
+mov ecx, 2 ; 起始扇区
+mov bl, 4 ; 读取扇区数量
 
 call read_disk
+
+cmp word [0x1000], 0x55aa
+jnz error
+
+jmp 0:0x1002
 
 ; 阻塞
 jmp $
@@ -110,6 +112,13 @@ print:
 
 booting:
     db "Booting ChenyOS...", 10, 13, 0 ; \n\t
+
+error:
+    mov si, .msg
+    call print
+    hlt ; 让CPU停止运行
+    jmp $
+    .msg db "Booting Error!!!", 10, 13, 0
 
 ; 其余位置填充为 0
 times 510 - ($ - $$) db 0
