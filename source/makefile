@@ -10,6 +10,7 @@ master.img: boot.bin
 clean:
 	rm -rf *.bin
 	rm -rf *.img
+	rm -rf *.ini
 
 .PHONY: bochs
 bochs: master.img
