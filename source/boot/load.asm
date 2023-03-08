@@ -117,8 +117,8 @@ protect_mode:
 
     mov esp, 0x10000 ; 修改栈顶
 
-    mov byte [0xb8000], 'P'
-    mov byte [0x200000], 'P'
+    ; mov byte [0xb8000], 'P'
+    ; mov byte [0x200000], 'P'
 
 jmp $
     
