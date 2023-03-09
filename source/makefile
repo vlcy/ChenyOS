@@ -29,8 +29,6 @@ $(BUILD)/kernel/%.o: $(SRC)/kernel/%.c
 
 $(BUILD)/kernel.bin: $(BUILD)/kernel/start.o \
 	 $(BUILD)/kernel/main.o
-
-$(BUILD)/kernel.bin: $(BUILD)/kernel/start.o
 	$(shell mkdir -p $(dir $@))
 	ld -m elf_i386 -static $^ -o $@ -Ttext $(ENTRYPOINT)
 
