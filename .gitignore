@@ -1,3 +1,10 @@
 source/*.ini
 
 build/
+
+bochs/pkg/
+bochs/src/
+bochs/*.gz
+bochs/*.zst
+
+.vscode/

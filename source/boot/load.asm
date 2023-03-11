@@ -5,7 +5,7 @@ dw 0x55aa ; 魔数，用于判断内核加载器是否有效
 mov si, loading
 call print
 
-xchg bx, bx
+; xchg bx, bx
 
 detect_memory:
     xor ebx, ebx
@@ -44,7 +44,7 @@ detect_memory:
     jmp prepare_protected_mode
 
 prepare_protected_mode:
-    xchg bx, bx
+    ; xchg bx, bx
 
     cli ; 关闭中断
 
@@ -107,7 +107,7 @@ error:
 
 [bits 32]
 protect_mode:
-    xchg bx, bx
+    ; xchg bx, bx
     mov ax, data_selector
     mov ds, ax
     mov es, ax
