@@ -8,3 +8,5 @@ bochs/*.gz
 bochs/*.zst
 
 .vscode/
+
+test/
